@@ -4,7 +4,8 @@ import jwt
 from fastapi import Request
 from fastapi.responses import JSONResponse
 # IMPORT FIREBASE
-from api.config.firebase import firebase
+import firebase_admin
+from firebase_admin import credentials
 
 
 def is_authenticated(request: Request):
@@ -16,16 +17,15 @@ def is_authenticated(request: Request):
         try:
             encoded_jwt = token.split(" ")[1]
 
-            payload = jwt.decode(
-                encoded_jwt, 
-                environ.get("SECRET_KEY"), 
-                algorithms=[environ.get("JWT_ALGORITHM")]
-            )
+            # verify id token
+            decoded_token = firebase_admin.auth.verify_id_token(encoded_jwt)
+            uid = decoded_token['uid']
+            print(uid)
             
             return {
                 "flag": True, 
-                "token": payload["token"], 
-                "role": payload["role"]
+                "uid": payload["uid"], 
+
             }
         
         except jwt.ExpiredSignatureError:
