@@ -1,7 +1,45 @@
 import React from 'react'
 import Navbaar from '../components/Navbaar'
+import axios from 'axios'
 
 function Home() {
+
+    const [search, setSearch] = React.useState('')
+    const [results, setResults] = React.useState([])
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const handleResponseData = (data) => {
+        let videoItems = data.items.filter((item) => {
+            if (item.id.kind === 'youtube#video') {
+                return item
+            }
+        })
+
+        videoItems = videoItems.slice(0, 3)
+
+        localStorage.setItem('videoItems', JSON.stringify(videoItems))
+
+        // redirect it to another page
+        // window.location.href = '/search-results'
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        axios.post('http://localhost:5000/user/search', {
+            query: search,
+            max_results: 15,
+        }).then((res) => {
+            // console.log(res.data)
+            handleResponseData(res.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
     return (
 
         <>
@@ -26,8 +64,13 @@ function Home() {
                 <div className='col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center'>
                     <p style={{ fontSize: "large" }}><b>What Are You Interested In Today?</b></p>
                     <div className='w-50 d-flex flex-row align-items-center'>
-                        <input type="search" placeholder="Search" className='col-md-12' style={{ borderRadius: "20px", border: "none", padding: "10px", backgroundColor: "#f6f2d2" }} />
-                        <button className='ps-3 pe-3 pt-2 pb-2 ms-3' style={{ backgroundColor: "#f68349", color: "white", borderRadius: "20px" }} >Search</button>
+                        <input type="search" placeholder="Search" className='col-md-12' style={{ borderRadius: "20px", border: "none", padding: "10px", backgroundColor: "#f6f2d2" }}
+                            value={search}
+                            onChange={handleSearch}
+                        />
+                        <button className='ps-3 pe-3 pt-2 pb-2 ms-3' style={{ backgroundColor: "#f68349", color: "white", borderRadius: "20px" }}
+                            onClick={handleSubmit}
+                        >Search</button>
 
                     </div>
                 </div>
@@ -35,5 +78,3 @@ function Home() {
         </>
     )
 }
-
-export default Home

@@ -19,24 +19,24 @@ function SearchResults() {
                     <div className='container col-md-12 d-flex flex-row align-items-center justify-content-around'>
                         <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0' style={{ fontFamily: "Verdana" }}><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
                             </div>
                         </button>
 
                         <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0' style={{ fontFamily: "Verdana" }}><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
                             </div>
                         </button>
 
                         <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0' style={{ fontFamily: "Verdana" }}><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
                             </div>
                         </button>
                         <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0' style={{ fontFamily: "Verdana" }}><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
                             </div>
                         </button>
 
@@ -82,5 +82,3 @@ function SearchResults() {
 
     )
 }
-
-export default SearchResults

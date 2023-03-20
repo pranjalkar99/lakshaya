@@ -2,9 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import errors
 from os import environ, path
+from firebase_admin import credentials
+import firebase_admin
+from api.config.database import database
+from logging import log
 
 import asyncio
 
+from api.routes.user import user_get_routes, user_post_routes
+
+cred = firebase_admin.credentials.Certificate("lakshaya_service_account_keys.json")
+firebase = firebase_admin.initialize_app(cred)
+print("Firebase initialized")
+print(firebase.name)
 
 BASE_DIR = path.abspath(path.dirname(__file__))
 
@@ -36,10 +46,11 @@ def create_app():
         try:
 
             # Loading environment variables from environment file
-            load_dotenv(path.join(BASE_DIR, '.env'))
+            # load_dotenv(path.join(BASE_DIR, '.env'))
             
             # Connect with database
             await asyncio.wait_for(database(), timeout=60.0)
+            print("STARTUP")
 
         except asyncio.TimeoutError as e:
             #TODO: log error and continuous retry
@@ -64,5 +75,15 @@ def create_app():
     @app.get("/")
     async def index():
         return {"message" : "running"}
+    
+    app.include_router(
+        user_get_routes.construct_router(),
+        prefix = "/user"
+    )
+
+    app.include_router(
+        user_post_routes.construct_router(),
+        prefix = "/user"
+    )
     
     return app
