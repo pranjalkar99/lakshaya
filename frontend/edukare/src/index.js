@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Home from './Home';
-import Quiz from './Quiz';
+import Home from './pages/Home';
+import Quiz from './pages/Quiz';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './Login';
-import SignUp from './SignUp';
-import SearchResults from './SearchResults';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import SearchResults from '../src/pages/SearchResults';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SearchResults />
-    {/* <Home /> */}
+    <App />
+
   </React.StrictMode>
 );
 
