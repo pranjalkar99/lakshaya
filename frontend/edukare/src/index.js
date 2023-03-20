@@ -6,11 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import Home from './Home';
 import Quiz from './Quiz';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './Login';
+import SignUp from './SignUp';
+import SearchResults from './SearchResults';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Quiz />
+    <SearchResults />
   </React.StrictMode>
 );
 

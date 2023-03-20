@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+
+
 
 function Quiz() {
+    const [correct, setCorrect] = useState(false);
+    const [incorrect, setIncorrect] = useState(false);
+    const [neutral, setNeutral] = useState(true);
     return (
         <>
             <div style={{ backgroundColor: "#9cd1cb", height: "100vh" }}>
@@ -20,7 +26,8 @@ function Quiz() {
                         <div className='col-md-12 d-flex flex-row align-items-center justify-content-around'>
                             <div className='col-md-4'>
                                 <p style={{ fontSize: "large" }}>1.What is the capital of India?</p>
-                                <div className='p-3 border rounded bg-light' >
+
+                                <div className='p-3 border rounded' style={{ backgroundColor: correct ? "lightgreen" : (incorrect ? "red" : "white") }} >
                                     <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style={{ height: "22px", width: "22px" }} />
                                     <label for="vehicle1"><p className='mb-0 ms-5' style={{ fontSize: "large" }}>Delhi</p> </label>
                                 </div>

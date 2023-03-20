@@ -1,20 +1,12 @@
 import React from 'react'
+import Navbaar from './components/Navbaar'
 
 function Home() {
     return (
 
         <>
             <div style={{ backgroundColor: "#9cd1cb", height: "100vh" }}>
-                <div className='w-100 d-flex align-items-center justify-content-between' style={{ height: "80px", filter: "drop-shadow(1px 1px 10px grey)" }}>
-                    <div className='col-md-4 d-flex align-items-center justify-content-center' style={{ backgroundColor: "#7aad8c", height: "100%" }}>
-                        <h2 style={{ color: "#f6f2d2" }} className="neon"><b>EduKare</b></h2>
-                    </div>
-                    <div className='col-md-8 d-flex align-items-center justify-content-around' style={{ backgroundColor: "#9fd2ca", height: "100%" }}>
-                        <a href='/' className='text-decoration-none'><p className='m-0 ' style={{ fontSize: "20px", color: "#652f05" }}><b >Home</b></p></a>
-                        <a href='/' className='text-decoration-none'><p className='m-0' style={{ fontSize: "20px", color: "#652f05" }}><b>About</b></p></a>
-                        <a href='/' className='text-decoration-none'><p className='m-0' style={{ fontSize: "20px", color: "#652f05" }}><b>Contact</b></p></a>
-                    </div>
-                </div>
+                <Navbaar />
                 <div className='d-flex flex-'>
                     <div className="d-flex flex-column justify-content-between mb-4">
                         <div className='ps-5 pt-5 col-md-9'>
@@ -31,10 +23,12 @@ function Home() {
                         <img src='./images/illustration.png' alt='illustration' height={450} />
                     </div>
                 </div>
-                <div className='col-md-12 mt-4 d-flex align-items-center justify-content-center'>
-                    <div className='w-50 d-flex flex-column align-items-center'>
-                        <p style={{ fontSize: "large" }}><b>What Are You Interested In Today?</b></p>
+                <div className='col-md-12 mt-4 d-flex flex-column align-items-center justify-content-center'>
+                    <p style={{ fontSize: "large" }}><b>What Are You Interested In Today?</b></p>
+                    <div className='w-50 d-flex flex-row align-items-center'>
                         <input type="search" placeholder="Search" className='col-md-12' style={{ borderRadius: "20px", border: "none", padding: "10px", backgroundColor: "#f6f2d2" }} />
+                        <button className='ps-3 pe-3 pt-2 pb-2 ms-3' style={{ backgroundColor: "#f68349", color: "white", borderRadius: "20px" }} >Search</button>
+
                     </div>
                 </div>
             </div>
