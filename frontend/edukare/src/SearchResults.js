@@ -9,6 +9,7 @@ function SearchResults() {
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const [loading, setLoading] = useState(false)
+    const [recommendationText, setRecommendationText] = useState("")
 
     useEffect(() => {
         const videoItems = JSON.parse(localStorage.getItem('videoItems'))
@@ -50,6 +51,15 @@ function SearchResults() {
             setLoading(false)
         })
     }
+
+    const handleRecommendation = (e) => {
+
+        const text = e.target.innerText
+        setRecommendationText(text)
+        setSearch(text)
+        console.log(search)
+        setLoading(false)
+    }
     
 
     return (
@@ -80,26 +90,34 @@ function SearchResults() {
             <div className='col-md-12 d-flex flex-row mt-4'>
                 <div className='col-md-9'>
                     <div className='container col-md-12 d-flex flex-row align-items-center justify-content-around'>
-                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
+                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}
+                            onClick={handleRecommendation}
+                        >
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Python</small>  </p>
                             </div>
                         </button>
 
-                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
+                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}
+                            onClick={handleRecommendation}
+                        >
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Integration</small>  </p>
                             </div>
                         </button>
 
-                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
+                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}
+                            onClick={handleRecommendation}
+                        >
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Differentiation </small>  </p>
                             </div>
                         </button>
-                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}>
+                        <button className='card col-md-2 rounded' style={{ backgroundColor: "#7aad8c", color: "white" }}
+                            onClick={handleRecommendation}
+                        >
                             <div className='card-body ps-1 pe-1 py-1'>
-                                <p className='m-0 p-0'><small>Lorem Ipsum is simply dummy text.. </small>  </p>
+                                <p className='m-0 p-0'><small>Hacking</small>  </p>
                             </div>
                         </button>
 
