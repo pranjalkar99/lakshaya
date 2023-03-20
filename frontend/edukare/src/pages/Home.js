@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbaar from './components/Navbaar'
+import Navbaar from '../components/Navbaar'
 
 function Home() {
     return (
