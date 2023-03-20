@@ -9,6 +9,11 @@ class ExamModel(Document):
     marks: int
     evaluation: bool
 
+class TestSeriesModel(Document):
+    score: int
+    test_id: str
+    
+
 class UserModel(Document):
     register_date: datetime.datetime = datetime.datetime.now()
     refresh_token: Optional[str] = ''
@@ -24,6 +29,7 @@ class UserModel(Document):
     email: Indexed(str, unique=True) 
     phone: Optional[str] = None
     standard: int
+    wrong_answers: Optional[List[str]] = []
 
     tests:  Optional[List[ExamModel]] = []
 

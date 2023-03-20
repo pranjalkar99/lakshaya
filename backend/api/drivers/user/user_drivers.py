@@ -23,3 +23,15 @@ class User:
             print(f"{e} excep err : student driver")
             raise exceptions.UnexpectedError()
         
+
+    async def get_user_profile(self, user_id: str):
+        #TODO: add suitable doc string and exception handling
+        user = await UserModel.find_one(
+            UserModel.user_id == user_id
+        )
+
+        if user is None:
+            return False       
+
+        return user.__dict__
+        
