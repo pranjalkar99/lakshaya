@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbaar from '../components/Navbaar'
 
-function SearchResults() {
+export default function SearchResults() {
     return (
         <div style={{ height: "100vh", backgroundColor: "#9cd1cb" }}>
             <Navbaar />

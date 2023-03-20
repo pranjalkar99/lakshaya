@@ -8,8 +8,8 @@ function Navbaar() {
             </div>
             <div className='col-md-8 d-flex align-items-center justify-content-around' style={{ backgroundColor: "#9fd2ca", height: "100%" }}>
                 <a href='/' className='text-decoration-none'><p className='m-0 ' style={{ fontSize: "20px", color: "#652f05" }}><b >Home</b></p></a>
-                <a href='/' className='text-decoration-none'><p className='m-0' style={{ fontSize: "20px", color: "#652f05" }}><b>Search</b></p></a>
-                <a href='/' className='text-decoration-none'><p className='m-0' style={{ fontSize: "20px", color: "#652f05" }}><b>Quiz</b></p></a>
+                <a href='/SearchResults' className='text-decoration-none'><p className='m-0' style={{ fontSize: "20px", color: "#652f05" }}><b>Search-Results</b></p></a>
+                <a href='/Quiz' className='text-decoration-none'><p className='m-0' style={{ fontSize: "20px", color: "#652f05" }}><b>Quiz</b></p></a>
             </div>
         </div>
     )

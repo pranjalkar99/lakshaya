@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,19 +13,47 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { UserAuth } from '../contexts/AuthContext';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../lib/firebase';
 
 
 const theme = createTheme();
 
 export default function SignIn(props) {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const { loginUser, signInWithGoogle, getAdditionalInfo } = UserAuth();
+
+    const [error, setError] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState(null);
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        try {
+            setLoading(true);
+            await loginUser(email, password).then((response) => {
+                localStorage.setItem("user_id", response.user.uid);
+                localStorage.setItem("access-token", response.user.accessToken);
+            });
+            console.log("user logged in");
+
+        } catch (e) {
+            console.log(e.message);
+            setError(true);
+            setOpen(true);
+            setMessage("Invalid email or password");
+        } finally {
+            setLoading(false);
+            navigate("/");
+        }
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -42,7 +71,7 @@ export default function SignIn(props) {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Log in
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
@@ -54,6 +83,7 @@ export default function SignIn(props) {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -64,6 +94,7 @@ export default function SignIn(props) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -90,6 +121,14 @@ export default function SignIn(props) {
                             </Grid>
                         </Grid>
                     </Box>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Or Sign In With Google
+                    </Button>
                 </Box>
             </Container>
         </ThemeProvider>

@@ -2,7 +2,7 @@ import React from 'react'
 import Navbaar from '../components/Navbaar'
 import axios from 'axios'
 
-function Home() {
+export default function Home() {
 
     const [search, setSearch] = React.useState('')
     const [results, setResults] = React.useState([])

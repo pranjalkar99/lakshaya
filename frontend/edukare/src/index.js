@@ -8,13 +8,13 @@ import Quiz from './pages/Quiz';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import SearchResults from './pages/SearchResults';
+import SearchResults from '../src/pages/SearchResults';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SearchResults />
-    {/* <Home /> */}
+    <App />
+
   </React.StrictMode>
 );
 
