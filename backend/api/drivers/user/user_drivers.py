@@ -23,5 +23,3 @@ class User:
             print(f"{e} excep err : student driver")
             raise exceptions.UnexpectedError()
         
-    
-    

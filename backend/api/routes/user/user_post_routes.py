@@ -5,6 +5,8 @@ import requests
 from api.drivers.user import user_drivers
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from summarizer import Summarizer
+from api.repository import user_repo
 
 URL = "https://youtube.googleapis.com/youtube/v3/search"
 
@@ -67,5 +69,24 @@ def construct_router():
 
         except Exception as e:
             Logger.error(e, log_msg="exception in get_user_profile route")
+
+    @user.post('/analyze-text')
+    async def analyze_text(
+        request: user_request_schemas.UserTextSummarySchema,
+    ):
+        # print(request.transcript)
+        try:
+            response = await (
+                user_repo.analyze_text(request)
+            )
+
+            print(response)
+
+            return response
+
+            return response
+        except Exception as e:
+            Logger.error(e, log_msg="exception in get_user_profile route")
+
     
     return user

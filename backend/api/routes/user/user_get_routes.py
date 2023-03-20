@@ -5,6 +5,7 @@ import api.repository.user_repo as user_repo
 from fastapi.responses import JSONResponse
 from api.schemas.user.request_schemas import user_request_schemas
 from api.utils.exceptions import exceptions
+from api.utils.nlp.youtube_transcript import get_transcript_v3
 import requests
 
 URL = "https://youtube.googleapis.com/youtube/v3/search"
@@ -49,4 +50,23 @@ def construct_router():
         except Exception as e:
             Logger.error(e, log_msg="exception in get_user_profile route")
 
+    @user.get('/get-youtube-transcript')
+    async def get_youtube_transcript(
+        request: user_request_schemas.GetYoutubeVideoTranscriptSchema
+    ):
+        print(request)
+        try:
+            text = get_transcript_v3(request.video_id)
+    # text2=get_subtitles_test(video_id)
+            if text:
+                return {"transcript": text}
+            else:
+                return {"error": "No transcript available"}
+
+        except Exception as e:
+            Logger.error(e, log_msg="exception in get_user_profile route")
+
+
     return user
+
+

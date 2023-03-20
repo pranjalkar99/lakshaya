@@ -14,3 +14,9 @@ class UserSignupSchema(BaseModel):
     gender: str
     email: EmailStr
     phone: Optional[str]
+
+class UserTextSummarySchema(BaseModel):
+    transcript: str
+
+class GetYoutubeVideoTranscriptSchema(BaseModel):
+    video_id: str
