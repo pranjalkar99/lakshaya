@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Pacifico&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Pacifico', cursive !important;
+
+}
+
+.neon {
+  color: #eecdfb;
+  text-align: start;
+  text-shadow:
+
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 40px #fff,
+    0 0 40px #f6f2d2,
+    0 0 80px #f6f2d2,
+    0 0 150px #f6f2d2,
+    0 0 250px #f6f2d2,
+
+}
