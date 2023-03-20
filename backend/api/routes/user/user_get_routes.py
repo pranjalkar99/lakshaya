@@ -31,6 +31,22 @@ def construct_router():
         tags=["User"]
     )
 
+    @user.get('/{user_id}')
+    async def get_user_profile(
+        user_id: str
+    ):
+        try:
+            response = await (
+                user_repo.get_user_profile_handler(user_id)
+            )
+
+            return response
+
+        except Exception as e:
+            Logger.error(e, log_msg="exception in get_user_profile route")
+
+    
+
     @user.post('/search')
     async def get_search_results(
         request: user_request_schemas.UserSearchSchema,
