@@ -31,6 +31,22 @@ def construct_router():
         tags=["User"]
     )
 
+    @user.post('/get-youtube-transcript')
+    async def get_youtube_transcript(
+        request: user_request_schemas.GetYoutubeVideoTranscriptSchema
+    ):
+        print(request)
+        try:
+            text = get_transcript_v3(request.video_id)
+    # text2=get_subtitles_test(video_id)
+            if text:
+                return {"transcript": text}
+            else:
+                return {"error": "No transcript available"}
+
+        except Exception as e:
+            Logger.error(e, log_msg="exception in get_user_profile route")
+        
     @user.get('/{user_id}')
     async def get_user_profile(
         user_id: str
@@ -66,21 +82,6 @@ def construct_router():
         except Exception as e:
             Logger.error(e, log_msg="exception in get_user_profile route")
 
-    @user.get('/get-youtube-transcript')
-    async def get_youtube_transcript(
-        request: user_request_schemas.GetYoutubeVideoTranscriptSchema
-    ):
-        print(request)
-        try:
-            text = get_transcript_v3(request.video_id)
-    # text2=get_subtitles_test(video_id)
-            if text:
-                return {"transcript": text}
-            else:
-                return {"error": "No transcript available"}
-
-        except Exception as e:
-            Logger.error(e, log_msg="exception in get_user_profile route")
 
 
     return user

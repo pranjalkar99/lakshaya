@@ -1,5 +1,6 @@
 from pydantic import AnyHttpUrl, BaseModel, EmailStr, root_validator, validator
 from typing import Optional
+from api.models.user.user_model import *
 
 class UserSearchSchema(BaseModel):
     query: str
@@ -10,7 +11,7 @@ class UserSignupSchema(BaseModel):
     fname: str
     lname: str
     standard: int
-    branch: Optional[str]
+    branch: Optional[str] = ""
     gender: str
     email: EmailStr
     phone: Optional[str]
@@ -20,3 +21,13 @@ class UserTextSummarySchema(BaseModel):
 
 class GetYoutubeVideoTranscriptSchema(BaseModel):
     video_id: str
+
+class UserUpdateData(BaseModel):
+    fname: Optional[str]
+    lname: Optional[str]
+    standard: Optional[int]
+    branch: Optional[str] = ""
+    gender: Optional[str]
+    email: Optional[EmailStr]
+    phone: Optional[str]
+    tests: Optional[List[ExamModel]] = []
