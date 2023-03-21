@@ -24,11 +24,13 @@ class User:
             raise exceptions.UnexpectedError()
         
 
-    async def get_user_profile(self, user_id: str):
+    async def get_user_profile(self, user_id):
         #TODO: add suitable doc string and exception handling
         user = await UserModel.find_one(
             UserModel.user_id == user_id
         )
+
+        print(user)
 
         if user is None:
             return False       

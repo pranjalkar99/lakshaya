@@ -3,6 +3,15 @@ from api.utils.exceptions import exceptions
 from fastapi.responses import JSONResponse
 import os
 
+from summarizer import Summarizer
+# from api.utils.sentence_mapping import get_nouns_multipartite,make_filtered_keys,tokenize_sentences,get_sentences_for_keyword,generate_question_options
+from api.utils.nlp.sentence_mapping import get_nouns_multipartite,make_filtered_keys,tokenize_sentences,get_sentences_for_keyword,generate_question_options
+
+# model = Summarizer()
+from api.utils.nlp.making_mcq import apply_wordsense_conceptnet_v1
+
+import random
+import re
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
@@ -16,7 +25,14 @@ from api.schemas.user.response_schemas import user_response_schema
 model_sum = Summarizer()
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
-
+def merge(list1):
+        merged_list = []
+        for element in list1:
+            if type(element) == list:
+                merged_list.extend(element)
+            else:
+                merged_list.append(element)
+        return merged_list
 
 def is_authenticated_and_authorized(request, authorization):
 
@@ -50,30 +66,6 @@ async def get_info(request, authorization):
 
         return JSONResponse(status_code=403,
                             content={"message": authorization["message"]})
-# from summarizer import Summarizer
-# model_sum = Summarizer()
-
-
-async def analyze_text(request):
-    qa = {}
-    model_sum = Summarizer()
-
-    result = model_sum(request.transcript, min_length=60)
-    questions = []
-    fully = ''.join(result)
-    full = fully.split(".")
-    # dic = get_sentence_keypair(full)
-
-    # for sentence in dic.keys():
-    #     for key in dic[sentence]:
-
-    #         questions.append(get_question(key,sentence))
-    #         for each_question in questions:
-    #             qa[each_question]=run_QA_inference(each_question,fully)
-
-    # response = {"result of Summary": fully, "keypair": dic, "questions": questions, "qa": qa}
-
-    return {fully}
 
 async def get_user_profile_handler(user_id):
     try:

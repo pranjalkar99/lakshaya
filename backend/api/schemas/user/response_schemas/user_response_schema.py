@@ -11,7 +11,6 @@ class UserDataSchema(BaseModel):
     standard: int
     email: EmailStr
     tests: Optional[List[ExamModel]] = []
-    wrong_answers: Optional[List[str]] = []
-    branch: Optional[str] = None
-    gender: str
-    phone: Optional[str] = None
+    # branch: Optional[str] = None
+    # gender: str
+    # phone: Optional[str] = None
